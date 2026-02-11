@@ -1,0 +1,29 @@
+{
+  "is-main": true,
+  "import": [
+    { "path": "mizchi/semver-component/gen/cabi", "alias": "cabi" },
+    { "path": "mizchi/semver", "alias": "lib" }
+  ],
+  "link": {
+    "wasm": {
+      "exports": [
+        "cabi_realloc:cabi_realloc",
+        "wasmExportCompareVersions:mizchi:semver/semver#compare-versions",
+        "wasmExportIncrementVersion:mizchi:semver/semver#increment-version",
+        "wasmExportIsPrerelease:mizchi:semver/semver#is-prerelease",
+        "wasmExportParseVersion:mizchi:semver/semver#parse-version"
+      ],
+      "export-memory-name": "memory"
+    },
+    "wasm-gc": {
+      "exports": [
+        "cabi_realloc:cabi_realloc",
+        "wasmExportCompareVersions:mizchi:semver/semver#compare-versions",
+        "wasmExportIncrementVersion:mizchi:semver/semver#increment-version",
+        "wasmExportIsPrerelease:mizchi:semver/semver#is-prerelease",
+        "wasmExportParseVersion:mizchi:semver/semver#parse-version"
+      ],
+      "export-memory-name": "memory"
+    }
+  }
+}

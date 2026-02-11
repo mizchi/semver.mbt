@@ -122,7 +122,7 @@ fn compare_string(a : String, b : String) -> Int {
   for i = 0, result = 0; i < len && result == 0; {
     let cmp = compare_char(a_chars[i], b_chars[i])
     continue i + 1, cmp
-  } else {
+  } nobreak {
     if result != 0 {
       result
     } else {
@@ -165,7 +165,7 @@ fn compare_prerelease(a : Array[PreId], b : Array[PreId]) -> Int {
     for i = 0, result = 0; i < len && result == 0; {
       let cmp = compare_pre_id(a[i], b[i])
       continue i + 1, cmp
-    } else {
+    } nobreak {
       if result != 0 {
         result
       } else {

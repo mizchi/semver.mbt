@@ -1,0 +1,23 @@
+package mizchi:semver;
+
+/// Semantic versioning interface
+interface semver {
+  /// Parse a semver string, returns empty string on error
+  parse-version: func(version-str: string) -> string;
+
+  /// Compare two semver strings
+  /// Returns: -1 if a < b, 0 if a == b, 1 if a > b
+  /// Returns 0 on parse error
+  compare-versions: func(version-a: string, version-b: string) -> s32;
+
+  /// Increment version by release type (major, minor, patch, premajor, preminor, prepatch, prerelease)
+  /// Returns empty string on error
+  increment-version: func(version-str: string, release-type: string) -> string;
+
+  /// Check if version is a prerelease
+  is-prerelease: func(version-str: string) -> bool;
+}
+
+world semver-world {
+  export semver;
+}
