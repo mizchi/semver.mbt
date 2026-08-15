@@ -216,7 +216,7 @@ test "oracle invalid parse" {
     "1.0.0-α", "1.0.0+α", "1.0.0+build!",
   ]
   for s in cases {
-    let result : Result[SemVer, SemVerError] = try? parse(s)
+    let result = try_parse(s)
     assert_true(result is Err(_))
   }
 }

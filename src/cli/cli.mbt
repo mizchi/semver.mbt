@@ -23,8 +23,8 @@ fn print_usage() -> Unit {
 ///|
 fn strip_v(version : String) -> String {
   match version {
-    [.. "v", .. rest] => rest.to_string()
-    [.. "V", .. rest] => rest.to_string()
+    [.. "v", .. rest] => rest.to_owned()
+    [.. "V", .. rest] => rest.to_owned()
     _ => version
   }
 }
@@ -139,9 +139,14 @@ fn to_output(version : @semver.SemVer) -> String {
 
 ///|
 fn parse_non_neg_int(value : String) -> Int? {
-  let result : Result[Int, Error] = try? @strconv.parse_int(value, base=10)
-  match result {
-    Ok(num) if num >= 0 => Some(num)
+  try {
+    let num = @string.parse_int(value)
+    if num >= 0 {
+      Some(num)
+    } else {
+      None
+    }
+  } catch {
     _ => None
   }
 }

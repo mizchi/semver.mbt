@@ -17,7 +17,9 @@ pub fn parse(input : String) -> SemVer raise SemVerError {
 
 ///|
 pub fn try_parse(input : String) -> Result[SemVer, SemVerError] {
-  try? parse(input)
+  try parse(input) |> Ok catch {
+    error => Err(error)
+  }
 }
 
 ///|
@@ -79,7 +81,7 @@ fn parse_numeric_id(value : String, label~ : String) -> Int raise SemVerError {
 
 ///|
 fn parse_int(value : String, label~ : String) -> Int raise SemVerError {
-  @strconv.parse_int(value, base=10) catch {
+  @string.parse_int(value) catch {
     _ => raise SemVerError::InvalidNumber(label)
   }
 }
@@ -118,24 +120,17 @@ fn has_leading_zero(value : String) -> Bool {
 
 ///|
 fn split_to_strings(value : String, sep : String) -> Array[String] {
-  value.split(sep).map(part => part.to_string()).to_array()
+  value.split(sep).map(part => part.to_owned()).to_array()
 }
 
 ///|
-fn split_once(
-  value : String,
-  sep : String,
-) -> (String, String?) raise SemVerError {
+fn split_once(value : String, sep : String) -> (String, String?) {
   match value.find(sep) {
     None => (value, None)
     Some(idx) => {
-      let left = value[:idx] catch {
-          _ => raise SemVerError::InvalidFormat("invalid delimiter boundary")
-        }
-      let right = value[idx + sep.length():] catch {
-          _ => raise SemVerError::InvalidFormat("invalid delimiter boundary")
-        }
-      (left.to_string(), Some(right.to_string()))
+      let left = value[:idx]
+      let right = value[idx + sep.length():]
+      (left.to_owned(), Some(right.to_owned()))
     }
   }
 }

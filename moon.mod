@@ -1,0 +1,17 @@
+name = "mizchi/semver"
+
+version = "0.1.1"
+
+source = "src"
+
+preferred_target = "js"
+
+readme = "README.mbt.md"
+
+repository = "https://github.com/mizchi/semver"
+
+license = "Apache-2.0"
+
+keywords = [ "semver", "versioning" ]
+
+description = "Semantic Versioning (SemVer 2.0.0) parser and comparator for MoonBit."

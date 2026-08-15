@@ -6,14 +6,14 @@ pub struct SemVer {
   patch : Int
   pre : Array[PreId]
   build : Array[String]
-} derive(Show, Eq, ToJson)
+} derive(Debug, Eq, ToJson)
 
 ///|
 /// Pre-release identifier.
 pub enum PreId {
   Num(Int)
   Str(String)
-} derive(Show, Eq, ToJson)
+} derive(Debug, Eq, ToJson)
 
 ///|
 /// Errors raised while parsing a SemVer string.
@@ -22,7 +22,7 @@ pub suberror SemVerError {
   InvalidNumber(String)
   LeadingZero(String)
   InvalidIdentifier(String)
-} derive(Show, Eq)
+} derive(Debug, Eq)
 
 ///|
 pub fn SemVer::new(major : Int, minor : Int, patch : Int) -> SemVer {
