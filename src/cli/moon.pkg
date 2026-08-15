@@ -1,0 +1,7 @@
+import {
+  "mizchi/semver",
+  "moonbitlang/core/env",
+  "moonbitlang/core/string",
+}
+
+pkgtype(kind: "executable")

@@ -2,7 +2,7 @@
 test "invalid core formats" {
   let cases = ["", "1", "1.0", "1.0.0.0"]
   for s in cases {
-    let result : Result[SemVer, SemVerError] = try? parse(s)
+    let result = try_parse(s)
     match result {
       Err(SemVerError::InvalidFormat(msg)) =>
         assert_eq(msg, "expected MAJOR.MINOR.PATCH")
@@ -23,7 +23,7 @@ test "invalid prerelease/build empty segments" {
   ]
   for item in cases {
     let (s, expected) = item
-    let result : Result[SemVer, SemVerError] = try? parse(s)
+    let result = try_parse(s)
     match result {
       Err(SemVerError::InvalidIdentifier(msg)) => assert_eq(msg, expected)
       _ => fail("expected InvalidIdentifier")
@@ -41,7 +41,7 @@ test "invalid identifier characters" {
   ]
   for item in cases {
     let (s, expected) = item
-    let result : Result[SemVer, SemVerError] = try? parse(s)
+    let result = try_parse(s)
     match result {
       Err(SemVerError::InvalidIdentifier(msg)) => assert_eq(msg, expected)
       _ => fail("expected InvalidIdentifier")
@@ -59,7 +59,7 @@ test "leading zeros" {
   ]
   for item in cases {
     let (s, expected) = item
-    let result : Result[SemVer, SemVerError] = try? parse(s)
+    let result = try_parse(s)
     match result {
       Err(SemVerError::LeadingZero(value)) => assert_eq(value, expected)
       _ => fail("expected LeadingZero")

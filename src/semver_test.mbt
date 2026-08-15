@@ -14,8 +14,8 @@ test "parse prerelease build" {
 
 ///|
 test "invalid leading zero" {
-  let result : Result[SemVer, SemVerError] = try? parse("01.2.3")
-  inspect(result, content="Err(LeadingZero(\"01\"))")
+  let result = try_parse("01.2.3")
+  debug_inspect(result, content="Err(LeadingZero(\"01\"))")
 }
 
 ///|

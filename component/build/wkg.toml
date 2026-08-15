@@ -1,0 +1,10 @@
+[metadata]
+name = "mizchi:semver"
+version = "0.1.0"
+# description = "Your component description"
+# licenses = "MIT"
+# author = "Your Name <you@example.com>"
+# source = "https://github.com/your/repo"
+
+[overrides]
+# "dep:name" = { path = "./path/to/wit" }

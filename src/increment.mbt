@@ -40,15 +40,7 @@ fn normalize_identifier_base(base : Int) -> Int {
 fn parse_identifier_opt(identifier : String?) -> PreId? {
   match identifier {
     None => None
-    Some(value) => {
-      let result : Result[PreId, SemVerError] = try? parse_prerelease_ident(
-        value,
-      )
-      match result {
-        Ok(id) => Some(id)
-        Err(_) => None
-      }
-    }
+    Some(value) => Some(parse_prerelease_ident(value)) catch { _ => None }
   }
 }
 

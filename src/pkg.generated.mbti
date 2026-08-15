@@ -1,6 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "mizchi/semver"
 
+import {
+  "moonbitlang/core/debug",
+}
+
 // Values
 pub fn inc(String, String, identifier? : String, identifier_base? : Int) -> String?
 
@@ -14,18 +18,13 @@ pub suberror SemVerError {
   InvalidNumber(String)
   LeadingZero(String)
   InvalidIdentifier(String)
-}
-pub impl Eq for SemVerError
-pub impl Show for SemVerError
+} derive(Eq, @debug.Debug)
 
 // Types and methods
 pub enum PreId {
   Num(Int)
   Str(String)
-}
-pub impl Eq for PreId
-pub impl Show for PreId
-pub impl ToJson for PreId
+} derive(Eq, ToJson, @debug.Debug)
 
 pub struct SemVer {
   major : Int
@@ -33,7 +32,7 @@ pub struct SemVer {
   patch : Int
   pre : Array[PreId]
   build : Array[String]
-}
+} derive(Eq, ToJson, @debug.Debug)
 pub fn SemVer::compare(Self, Self) -> Int
 pub fn SemVer::inc(Self, String, identifier? : String, identifier_base? : Int) -> Self?
 pub fn SemVer::is_prerelease(Self) -> Bool
@@ -41,11 +40,7 @@ pub fn SemVer::new(Int, Int, Int) -> Self
 pub fn SemVer::strip_build(Self) -> Self
 pub fn SemVer::to_string(Self) -> String
 pub fn SemVer::with_prerelease(Int, Int, Int, String, Int) -> Self
-pub impl Eq for SemVer
-pub impl Show for SemVer
-pub impl ToJson for SemVer
 
 // Type aliases
 
 // Traits
-

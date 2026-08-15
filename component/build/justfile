@@ -1,0 +1,28 @@
+# Build and deploy script for wkg
+# Usage: just <command>
+
+default:
+    @just --list
+
+# Build the wasm module
+build:
+    moon build --target wasm --directory ..
+
+# Create wasm component from built module
+component: build
+    wasm-tools component embed ../../wit/world.wit ../target/wasm/release/build/impl/impl.wasm --world semver-world -o component-embedded.wasm
+    wasm-tools component new component-embedded.wasm -o component.wasm
+    rm component-embedded.wasm
+
+# Validate the component
+validate: component
+    wasm-tools validate --features component-model component.wasm
+    wasm-tools component wit component.wasm
+
+# Publish to wa.dev registry
+publish: validate
+    wkg publish component.wasm
+
+# Clean build artifacts
+clean:
+    rm -f component.wasm component-embedded.wasm
